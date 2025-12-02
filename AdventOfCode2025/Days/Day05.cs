@@ -7,7 +7,7 @@ namespace AdventOfCode2025.Days;
 
 public static class Day05
 {
-    private static string dayName = MethodBase.GetCurrentMethod().DeclaringType.Name;
+    private static readonly string? DayName = MethodBase.GetCurrentMethod()?.DeclaringType?.Name;
     public static void RunDay()
     {
         Debug.Assert(SolvePart1(true) == 0);
@@ -19,26 +19,18 @@ public static class Day05
 
     private static int SolvePart1(bool isTest = false)
     {
-        var filename = $"Data/{dayName}{(isTest ? ".Test" : "")}.txt";
+        var filename = $"Data/{DayName}{(isTest ? ".Test" : "")}.txt";
         var input = FileUtility.ReadLinesFromFile(filename);
         var solution = 0;
-        
-        
-        
-        
         
         return solution;
     }
 
     private static int SolvePart2(bool isTest = false)
     {
-        var filename = $"Data/{dayName}{(isTest ? ".Test" : "")}.txt";
+        var filename = $"Data/{DayName}{(isTest ? ".Test" : "")}.txt";
         var input = FileUtility.ReadLinesFromFile(filename);
         var solution = 0;
-        
-        
-        
-        
         
         return solution;
     }
