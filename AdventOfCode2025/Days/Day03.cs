@@ -19,12 +19,12 @@ public static class Day03
         Console.WriteLine($"Part 2: {SolvePart2()}");
     }
 
-    private static int SolvePart1(bool isTest = false)
+    private static long SolvePart1(bool isTest = false)
     {
         var filename = $"Data/{DayName}{(isTest ? ".Test" : "")}.txt";
         var input = FileUtility.ReadLinesFromFile(filename);
 
-        return input.Sum(GetLargestNumber);
+        return input.Sum(n=>FindLargestNumberOfSizeN(n, 2));
     }
 
     private static int GetLargestNumber(string input)
