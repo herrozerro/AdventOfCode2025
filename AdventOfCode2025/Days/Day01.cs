@@ -1,23 +1,15 @@
 using System.Diagnostics;
-using System.Reflection;
-using System.Text.RegularExpressions;
+using AdventOfCode2025.Abstractions;
 using AdventOfCode2025.Utilities;
 
 namespace AdventOfCode2025.Days;
 
-public static class Day01
+public class Day01 : Day
 {
-    private static readonly string DayName = MethodBase.GetCurrentMethod().DeclaringType.Name;
-    public static void RunDay()
-    {
-        Debug.Assert(SolvePart1(true) == 3);
-        Debug.Assert(SolvePart2(true) == 6);
-        
-        Console.WriteLine($"Part 1: {SolvePart1()}");
-        Console.WriteLine($"Part 2: {SolvePart2()}");
-    }
-
-    public static int SolvePart1(bool isTest = false)
+    protected override long PartOneTestAnswer => 3; 
+    protected override long PartTwoTestAnswer => 6;
+    
+    protected override long SolvePart1(bool isTest = false)
     {
         var filename = $"Data/{DayName}{(isTest ? ".Test" : "")}.txt";
         var input = FileUtility.ReadLinesFromFile(filename);
@@ -34,7 +26,7 @@ public static class Day01
         return timesAt0;
     }
 
-    private static int TurnKnob(int position, int steps, int max)
+    private int TurnKnob(int position, int steps, int max)
     {
         position += steps;
         
@@ -44,7 +36,7 @@ public static class Day01
         return position;
     }
 
-    public static int SolvePart2(bool isTest = false)
+    protected override long SolvePart2(bool isTest = false)
     {
         var filename = $"Data/{DayName}{(isTest ? ".Test" : "")}.txt";
         var input = FileUtility.ReadLinesFromFile(filename);
@@ -62,7 +54,7 @@ public static class Day01
         return timesAt0;
     }
     
-    private static (int, int) TurnKnobWithZeros(int position, int steps, int max)
+    private (int, int) TurnKnobWithZeros(int position, int steps, int max)
     {
         bool startedOnZero = position == 0;
         bool endedOnZero = false;

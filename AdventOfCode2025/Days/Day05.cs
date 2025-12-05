@@ -1,23 +1,11 @@
-using System.Diagnostics;
-using System.Reflection;
-using System.Text.RegularExpressions;
+using AdventOfCode2025.Abstractions;
 using AdventOfCode2025.Utilities;
 
 namespace AdventOfCode2025.Days;
 
-public static class Day05
+public class Day05 : Day
 {
-    private static readonly string? DayName = MethodBase.GetCurrentMethod()?.DeclaringType?.Name;
-    public static void RunDay()
-    {
-        Debug.Assert(SolvePart1(true) == 0);
-        Debug.Assert(SolvePart2(true) == 0);
-        
-        Console.WriteLine($"Part 1: {SolvePart1()}");
-        Console.WriteLine($"Part 2: {SolvePart2()}");
-    }
-
-    private static int SolvePart1(bool isTest = false)
+    protected override long SolvePart1(bool isTest = false)
     {
         var filename = $"Data/{DayName}{(isTest ? ".Test" : "")}.txt";
         var input = FileUtility.ReadLinesFromFile(filename);
@@ -26,7 +14,7 @@ public static class Day05
         return solution;
     }
 
-    private static int SolvePart2(bool isTest = false)
+    protected override long SolvePart2(bool isTest = false)
     {
         var filename = $"Data/{DayName}{(isTest ? ".Test" : "")}.txt";
         var input = FileUtility.ReadLinesFromFile(filename);

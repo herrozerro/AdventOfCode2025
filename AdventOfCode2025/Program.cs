@@ -1,15 +1,33 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿using System.Reflection;
+using AdventOfCode2025.Abstractions;
 
-using AdventOfCode2025.Days;
+// Find all days
+var days = Assembly.GetExecutingAssembly().GetTypes()
+    .Where(t => t.IsSubclassOf(typeof(Day)) && !t.IsAbstract)
+    .Select(t => (Day)Activator.CreateInstance(t)!)
+    .OrderBy(d => d.GetType().Name)
+    .ToList();
 
-Console.WriteLine("Hello, World!");
-
-//Day01.RunDay();
-//Day02.RunDay();
-//Day03.RunDay();
-Day04.RunDay();
-//Day05.RunDay();
-
-
+// Logic: Check if user provided an argument, otherwise run latest
+if (args.Length > 0)
+{
+    if (args[0] == "all")
+    {
+        days.ForEach(d => d.RunDay());
+    }
+    else
+    {
+        // Try to match "Day05" or just "5"
+        var target = days.FirstOrDefault(d => 
+            d.GetType().Name.EndsWith(args[0].PadLeft(2, '0')));
+            
+        target?.RunDay();
+    }
+}
+else
+{
+    // Default: Run the last one added
+    days.LastOrDefault()?.RunDay();
+}
 
 Console.ReadKey();

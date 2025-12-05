@@ -1,35 +1,24 @@
 using System.Diagnostics;
-using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Text.RegularExpressions;
+using AdventOfCode2025.Abstractions;
 using AdventOfCode2025.Utilities;
 
 namespace AdventOfCode2025.Days;
 
-public static class Day03
+public class Day03 : Day
 {
-    private static readonly string? DayName = MethodBase.GetCurrentMethod()?.DeclaringType?.Name;
-    public static void RunDay()
+    protected override long PartOneTestAnswer => 357; 
+    protected override long PartTwoTestAnswer => 3121910778619;
+    
+    protected override long SolvePart1(bool isTest = false)
     {
-        Debug.Assert(SolvePart1(true) == 357);
-        Debug.Assert(SolvePart2(true) == 3121910778619);
-        
-        Console.WriteLine($"Part 1: {SolvePart1()}");
-        Console.WriteLine($"Part 2: {SolvePart2()}");
-    }
-
-    private static long SolvePart1(bool isTest = false)
-    {
-        var filename = $"Data/{DayName}{(isTest ? ".Test" : "")}.txt";
-        var input = FileUtility.ReadLinesFromFile(filename);
+        var input = FileUtility.ReadLinesFromFile(Filename(isTest));
 
         return input.Sum(n=>FindLargestNumberOfSizeN(n, 2));
     }
 
-    private static int GetLargestNumber(string input)
+    private int GetLargestNumber(string input)
     {
-        (int,int) largestDigits = (0, 0);
+        var largestDigits = (0, 0);
         var largestIndex = 0;
         var index = 0;
         //find the largest digit going forward
@@ -52,13 +41,12 @@ public static class Day03
         }
 
         return (largestDigits.Item1 * 10) + largestDigits.Item2;
-    }
+    } 
     
 
-    private static long SolvePart2(bool isTest = false)
+    protected override long SolvePart2(bool isTest = false)
     {
-        var filename = $"Data/{DayName}{(isTest ? ".Test" : "")}.txt";
-        var input = FileUtility.ReadLinesFromFile(filename);
+        var input = FileUtility.ReadLinesFromFile(Filename(isTest));
         var solution = 0L;
         foreach (var line in input)
         {
@@ -69,7 +57,7 @@ public static class Day03
         return solution;
     }
 
-    private static long FindLargestNumberOfSizeN(string input, int nSize)
+    private long FindLargestNumberOfSizeN(string input, int nSize)
     {
         var digits = new int[nSize];
         

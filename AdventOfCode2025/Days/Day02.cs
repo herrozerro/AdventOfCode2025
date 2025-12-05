@@ -1,29 +1,17 @@
-using System.Data.SqlTypes;
 using System.Diagnostics;
-using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Text.RegularExpressions;
-using System.Xml;
+using AdventOfCode2025.Abstractions;
 using AdventOfCode2025.Utilities;
 
 namespace AdventOfCode2025.Days;
 
-public static class Day02
+public class Day02 : Day
 {
-    private static string dayName = MethodBase.GetCurrentMethod().DeclaringType.Name;
-    public static void RunDay()
+    protected override long PartOneTestAnswer => 1227775554; 
+    protected override long PartTwoTestAnswer => 4174379265;
+    
+    protected override long SolvePart1(bool isTest = false)
     {
-        Debug.Assert(SolvePart1(true) == 1227775554);
-        Debug.Assert(SolvePart2(true) == 4174379265);
-        
-        Console.WriteLine($"Part 1: {SolvePart1()}");
-        Console.WriteLine($"Part 2: {SolvePart2()}");
-    }
-
-    private static long SolvePart1(bool isTest = false)
-    {
-        var filename = $"Data/{dayName}{(isTest ? ".Test" : "")}.txt";
-        var input = FileUtility.ReadDelimitedStringsFromFile(filename,',');
+        var input = FileUtility.ReadDelimitedStringsFromFile(Filename(isTest),',');
         var solution = new List<long>();
 
         foreach (var ranges in input.Select(range => range.Split('-').Select(long.Parse).ToList()))
@@ -34,10 +22,9 @@ public static class Day02
         return solution.Sum();
     }
 
-    private static long SolvePart2(bool isTest = false)
+    protected override long SolvePart2(bool isTest = false)
     {
-        var filename = $"Data/{dayName}{(isTest ? ".Test" : "")}.txt";
-        var input = FileUtility.ReadDelimitedStringsFromFile(filename,',');
+        var input = FileUtility.ReadDelimitedStringsFromFile(Filename(isTest),',');
         var solution = new List<long>();
 
         foreach (var ranges in input.Select(range => range.Split('-').Select(long.Parse).ToList()))
@@ -48,7 +35,7 @@ public static class Day02
         return solution.Sum();
     }
 
-    private static List<long> FindDoubledPatternsInRange(long start, long end)
+    private List<long> FindDoubledPatternsInRange(long start, long end)
     {
         // if start is bigger than end, flip values
         if (start > end) 
@@ -62,7 +49,7 @@ public static class Day02
 
     }
 
-    private static List<long> FindAnyDoubledPatternsInRange(long start, long end)
+    private List<long> FindAnyDoubledPatternsInRange(long start, long end)
     {
         var doubledNumbers = new List<long>();
         if (start > end) 
@@ -89,19 +76,19 @@ public static class Day02
         return doubledNumbers;
     }
 
-    private static List<int> FindDenominators(int numerator)
+    private List<int> FindDenominators(int numerator)
     {
         return Enumerable.Range(1, numerator).Where(divisor => numerator % divisor == 0 && divisor < numerator).ToList();
     }
 
-    private static List<string> Slices(string str, int length)
+    private List<string> Slices(string str, int length)
     {
         //return slices like 1010 would return 10, 10
         return Enumerable.Range(0, str.Length / length).Select(i => str.Substring(i*length, length)).ToList();
     }
     
     
-    public static IEnumerable<long> CreateLongRange(long start, long count)
+    public IEnumerable<long> CreateLongRange(long start, long count)
     {
         long limit = start + count;
         for (long i = start; i < limit; i++)
