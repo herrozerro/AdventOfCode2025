@@ -10,7 +10,7 @@ public abstract class Day
     protected virtual long PartOneTestAnswer => 0;
     protected virtual long PartTwoTestAnswer => 0;
     
-    public new void RunDay()
+    public void RunDay()
     {
         Console.WriteLine($"Running day {DayName}");
         if (PartOneTestAnswer != 0)
