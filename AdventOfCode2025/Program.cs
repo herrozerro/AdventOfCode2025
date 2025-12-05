@@ -11,7 +11,7 @@ var days = Assembly.GetExecutingAssembly().GetTypes()
 // Logic: Check if user provided an argument, otherwise run latest
 if (args.Length > 0)
 {
-    if (args[0] == "all")
+    if (args[0].Equals("all", StringComparison.CurrentCultureIgnoreCase))
     {
         days.ForEach(d => d.RunDay());
     }
