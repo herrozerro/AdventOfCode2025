@@ -57,7 +57,7 @@ public class $DAY_NAME : Day
     protected override long SolvePart1(bool isTest = false)
     {
         var input = FileUtility.ReadLinesFromFile(Filename(isTest));
-        var solution = 0;
+        var solution = 0L;
         
         return solution;
     }
@@ -65,7 +65,7 @@ public class $DAY_NAME : Day
     protected override long SolvePart2(bool isTest = false)
     {
         var input = FileUtility.ReadLinesFromFile(Filename(isTest));
-        var solution = 0;
+        var solution = 0L;
         
         return solution;
     }

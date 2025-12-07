@@ -7,7 +7,6 @@ namespace AdventOfCode2025.Days;
 
 public class Day06 : Day
 {
-    // TODO: Set test values
     protected override long PartOneTestAnswer => 4277556;
     protected override long PartTwoTestAnswer => 3263827;
 
